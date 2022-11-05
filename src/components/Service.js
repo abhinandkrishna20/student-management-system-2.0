@@ -6,7 +6,7 @@ class Service {
         return axios.get(baseURL);
     }
     getStudentById(stdid){
-        return axios.get(baseURL+stdid);
+        return axios.get(baseURL+stdid)
     }
 
     addStudent(student){
@@ -15,8 +15,8 @@ class Service {
     updateStudent(student,stdid){
         return axios.put(baseURL+stdid,student);
     }
-    deleteStudent(stdid){
-        return axios.delete(baseURL+stdid);
+    deleteStudent =(stdid) =>{
+        return axios.delete(baseURL+'/'+stdid);
     }
 }
 export default new Service;

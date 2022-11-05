@@ -45,7 +45,7 @@ connection.query(sql,(err,result)=>{
         console.log(err);
     }else{
         console.log("Delted "+result.affectedRows);
-        
+        console.log(res);
     }
 })
 });
