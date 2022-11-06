@@ -7,12 +7,7 @@ import { useEffect } from 'react';
 
 const Table = () =>{
     const [stdlist, updateList] = useState([]);
-    const deleteStd = (id) =>{
-        // const url= "http://localhost:3002/students/"+id;
-        //   axios.delete(url).then(res=>{
-            // alert(res.status);
-        //   })
-    };
+    const [student, updateStudent] = useState("");
     const onload =() =>{
         axios.get("http://localhost:3002/students/")
         .then(res =>{
@@ -20,8 +15,19 @@ const Table = () =>{
         });
     };
     const updateSTD = (id)=>{
-
+        axios.get("http://localhost:3002/students/"+id)
+        .then(res=>{
+            updateStudent(res.data);
+        })
+        
     }
+    const deleteStd = (id) =>{
+        // const url= "http://localhost:3002/students/"+id;
+        //   axios.delete(url).then(res=>{
+            // alert(res.status);
+        //   })
+    };
+
     useEffect(()=>{
         onload();
     },[]);

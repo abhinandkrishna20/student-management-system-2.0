@@ -1,6 +1,7 @@
 import { Link} from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
+import {stude} from './Table';
 // import { useEffect } from "react";
 
 const UpdateStudent = (props) => {
@@ -34,6 +35,7 @@ const UpdateStudent = (props) => {
       window.location = "/";
       });
   }
+  setStudent(student);
   const getData=()=>{
         const id = props.match.params.id;
     axios.get("http://localhost:3002/students/"+id).then(res =>{
