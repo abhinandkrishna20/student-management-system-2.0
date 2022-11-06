@@ -2,21 +2,17 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {confirm} from 'react-confirm-box';
+
 
 
 const Table = () =>{
     const [stdlist, updateList] = useState([]);
     const deleteStd = (id) =>{
-        const url= "http://localhost:3002/students/"+id;
-
-        if(confirm("Are your sure to delete the record ?")=== true){
-            axios.delete(url);
-        }else
-        {
-            alert("Canceled")
-        }
-    }
+        // const url= "http://localhost:3002/students/"+id;
+        //   axios.delete(url).then(res=>{
+            // alert(res.status);
+        //   })
+    };
     const onload =() =>{
         axios.get("http://localhost:3002/students/")
         .then(res =>{
@@ -74,7 +70,9 @@ return(
                         <td className="p-3">{std.education}</td>
                         <td  className="p-3" onClick={()=>{updateSTD(std.id)}}>
                         <Link to={"/update/"+std.id}>
-                            <i class="fas fa-user-edit text-primary p-1"></i>Edit</Link></td>
+                            <i class="fas fa-user-edit text-primary p-1"></i>Edit</Link>
+                            
+                            </td>
 
                         <td className="p-3"><button onClick={deleteStd(std.id)} className='btn text-decoration-none text-danger'>
                             <i class="fa fa-trash text-danger p-2" aria-hidden="true"></i>Delete</button></td>
@@ -87,6 +85,7 @@ return(
             </tbody>
         </table>
         </div>
+        
     </div>
 );
 

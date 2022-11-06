@@ -4,6 +4,7 @@ import Addstd from './components/Addstd';
 import Table from './components/Table';
 import { BrowserRouter,Routes,Route} from 'react-router-dom';
 import UpdateStudent from './components/UpdateStudent';
+import View from './components/View';
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <Route exact path ="/students" element={<Table />}></Route>
         <Route exact path ="/addstd/" element={<Addstd />}></Route>
         {/* <Route exact path ={"/students/:id"} element={<UpdateStudent />}></Route> */}
-        <Route exact path ={"/update/:id"} element={<UpdateStudent />}></Route>
-        
+        <Route exact path ="/update/:id" element={<UpdateStudent />}></Route>
+        <Route path ="/view/:id" element = {<View />} ></Route>
       </Routes>
       </BrowserRouter>
 
