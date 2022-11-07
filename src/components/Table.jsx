@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 const Table = () =>{
     const [stdlist, updateList] = useState([]);
     const [student, updateStudent] = useState("");
+    
     const onload =() =>{
         axios.get("http://localhost:3002/students/")
         .then(res =>{
@@ -66,7 +67,7 @@ return(
             <tbody >{
                 stdlist.map((std,index) =>{
                     return(
-                         
+    
                         <tr key={index}>
                         <td className="p-3">{std.id}</td>
                         <td className="p-3">{std.fname}</td>

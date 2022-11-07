@@ -12,7 +12,7 @@ const Addstd = (props) => {
     const [dt, setDt] = useState("");
     const [mm, setMm] = useState("");
     const [yr, setYr] = useState("");
-    const dob = yr+"-"+mm+"-"+dt;
+    const dob =     dt+"-"+mm+"-"+yr;
   const setData = (e) =>{
     e.preventDefault();
     

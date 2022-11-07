@@ -17,6 +17,7 @@ const UpdateStudent = (props) => {
   const [mm, setMm] = useState("Initial value");
   const [yr, setYr] = useState("Initial value");
   const [student,setStudent] = useState([]);
+  const dob =     dt+"-"+mm+"-"+yr;
   const param = useParams();
   const id = param.id;
   const getData=()=>{
@@ -41,31 +42,19 @@ const UpdateStudent = (props) => {
   const setData = (e) =>{
     e.preventDefault();
     
-    const Dt = yr+"-"+mm+"-"+dt;
-    const dob = Dt.toString();
-// 
-      // const student1 ={
-        // fname,
-        // lname,
-        // dob,
-        // location,
-        // email,
-        // education,
-        // about
-    // }
+    const stdData ={
+      fname,
+      lname,
+      dob,
+      location,
+      email,
+      education,
+      about
+  }
 
-    // student ={
-        // fname,
-        // lname,
-        // dob,
-        // location,
-        // email,
-        // education,
-        // about
-    // }
     
-      axios.put("http://localhost:3002/update/"+id,student).then(res=>{
-      alert("Studend updated : " + student.fname);
+      axios.put("http://localhost:3002/update/"+id,stdData).then(res=>{
+      alert("Studend updated : " + stdData.fname);
       window.location = "/";
       });
   }
