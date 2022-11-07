@@ -61,7 +61,8 @@ app.put("/update/:id",(req,res) =>{
         about:req.body.about
         
         };
-        let sql = "UPDATE students SET fname = "+std1.fname+ " WHERE id="+std1.id;
+        const ups = "fname="+std1.fname+" lname="+std1.lname+" location="+std1.location+" email="+std1.email+" dob="+std1.dob+" education="+std1.education+" about="+std1.about;
+        let sql = "UPDATE students SET fname = "+ups+ " WHERE id="+std1.id;
         connection.query(sql,std1,(err)=>{
             if(!err){
                 console.log("Something Error");
