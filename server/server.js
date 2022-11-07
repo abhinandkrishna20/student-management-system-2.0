@@ -32,10 +32,10 @@ app.get("/students/:id", (req,res)=>{
         if(err){
             console.log(err);
         }else{
-            console.log(result);
-            res.send(result);
+            console.log(result[0]);
+            res.send(result[0]);
         }
-        console.log(res.data);
+        // console.log(res.data);
     });
 })
 app.delete("/students/:id",(req,res)=>{
@@ -48,6 +48,29 @@ connection.query(sql,(err,result)=>{
         console.log(res);
     }
 })
+});
+app.put("/update/:id",(req,res) =>{
+    let std1=    {
+        id:req.body.id,
+        fname:req.body.fname,
+        lname:req.body.lname,
+        location: req.body.location,
+        email:req.body.email,
+        dob:req.body.dob,
+        education:req.body.education,
+        about:req.body.about
+        
+        };
+        let sql = "UPDATE students SET fname ="+fname+ "WHERE id="+std1.id;
+        connection.query(sql,std1,(err)=>{
+            if(!err){
+                console.log("One record Updated");
+                
+            }
+            res.send("One record updatad");
+        });
+    
+    
 });
 app.post("/addSTD",(req,res)=>{
 let std1=    {

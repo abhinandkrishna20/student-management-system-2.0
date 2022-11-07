@@ -2,7 +2,7 @@
 import './App.css';
 import Addstd from './components/Addstd';
 import Table from './components/Table';
-import { BrowserRouter,Routes,Route} from 'react-router-dom';
+import { BrowserRouter,Routes,Route, useParams} from 'react-router-dom';
 import UpdateStudent from './components/UpdateStudent';
 
 

@@ -1,55 +1,64 @@
-import { Link} from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 import {stude} from './Table';
-// import { useEffect } from "react";
+import { useEffect } from "react";
+import Table from "./Table";
 
 const UpdateStudent = (props) => {
     
-  const [fname, setFName] = useState("");
-  const [lname, setLName] = useState("");
-  const [location, setLocation] = useState("");
-  const [email, setEmail] = useState({});
-  const [education, setEducation] = useState("");
-  const [about, setAbout] = useState("");
-  const [dt, setDt] = useState("");
-  const [mm, setMm] = useState("");
-  const [yr, setYr] = useState("");
-  const [student,setStudent] = useState({});
-    
+  const [fname, setFName] = useState("Intialvalue");
+  const [lname, setLName] = useState("Initialvalue");
+  const [location, setLocation] = useState("Initial value");
+  const [email, setEmail] = useState("Initial value");
+  const [education, setEducation] = useState("Initial value");
+  const [about, setAbout] = useState("Initial value");
+  const [dt, setDt] = useState("Initial value");
+  const [mm, setMm] = useState("Initial value");
+  const [yr, setYr] = useState("Initial value");
+  const [student,setStudent] = useState([]);
+  const param = useParams();
+  const id = param.id;
+
   const setData = (e) =>{
     e.preventDefault();
     
-    const DOB = yr+"-"+mm+"-"+dt;
+    const Dt = yr+"-"+mm+"-"+dt;
+    const dob = Dt.toString();
+
     const stdData ={
         fname,
         lname,
-        DOB,
+        dob,
         location,
         email,
         education,
         about
     }
-      axios.put("http://localhost:3002/addSTD/"+props.matchparams.id,stdData).then(res=>{
-      alert("Studend updated" + res.status);
+    
+      axios.put("http://localhost:3002/update/"+id,stdData).then(res=>{
+      alert("Studend updated : " + res.data);
       window.location = "/";
       });
   }
-  setStudent(student);
   const getData=()=>{
-        const id = props.match.params.id;
-    axios.get("http://localhost:3002/students/"+id).then(res =>{
-        setStudent(res.data);
-        alert(res.status);
-    });
+    // const id = param.id;
+    axios.get("http://localhost:3002/students/"+id).then(res=>{
+      setStudent(res.data);
+    alert(student.fname);
 
+      
+    });
+    
+    
   }
   // useEffect(()=>{
     // getData();
   // },[]);
   return (
-    <div className="container" onLoad={getData}>
-      <h5 className="text-center">Update Student</h5>
+    <div className="container" >
+      <h4 className="text-center">Update Student</h4>
+      <button onClick={getData}>click me </button>
       <Link to="/">
         <i className="fa fa-arrow-left"></i>
       </Link>
@@ -64,9 +73,9 @@ const UpdateStudent = (props) => {
               type="text"
               className="form-control"
               name="fname"
-              // placeholder="Enter First Name"
-              value={student.fname}
               onChange={(e)=>setFName(e.target.value)}
+              defaultValue={student.fname}
+              
             />
           </div>
           <div className="col-md-2">
@@ -78,7 +87,7 @@ const UpdateStudent = (props) => {
               className="form-control"
               name="lname"
               // placeholder="Enter Last Name"
-              value={student.lname}
+              defaultValue={student.lname}
               onChange={(e)=>setLName(e.target.value)}
             />
           </div>
@@ -93,7 +102,7 @@ const UpdateStudent = (props) => {
               className="form-control"
               name="location"
               // placeholder="Enter Location"
-              value={student.location}
+              defaultValue={student.location}
               onChange={(e)=>setLocation(e.target.value)}
             />
           </div>
@@ -107,8 +116,7 @@ const UpdateStudent = (props) => {
               type="text"
               className="form-control"
               name="email"
-              // placeholder="Enter E-mail"
-              value={student.email}
+              defaultValue={student.email}
               onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
@@ -157,8 +165,7 @@ const UpdateStudent = (props) => {
               type="text"
               className="form-control"
               name="education"
-              value={student.education}
-              // placeholder="Enter Education"
+              defaultValue={student.education}
               onChange={(e)=>setEducation(e.target.value)}
             />
           </div>
@@ -173,8 +180,7 @@ const UpdateStudent = (props) => {
               id=""
               cols="25"
               rows="5"
-              // placeholder="About Yourself..."
-              value={student.about}
+              defaultValue={student.about}
               onChange={(e)=>setAbout(e.target.value)}
             ></textarea>
           </div>

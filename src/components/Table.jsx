@@ -66,6 +66,7 @@ return(
             <tbody >{
                 stdlist.map((std,index) =>{
                     return(
+                         
                         <tr key={index}>
                         <td className="p-3">{std.id}</td>
                         <td className="p-3">{std.fname}</td>
@@ -74,8 +75,10 @@ return(
                         <td  className="p-3">{std.email}</td>
                         <td className="p-3">{std.dob}</td>
                         <td className="p-3">{std.education}</td>
-                        <td  className="p-3" onClick={()=>{updateSTD(std.id)}}>
-                        <Link to={"/update/"+std.id}>
+                        <td  className="p-3" 
+                        
+                        >
+                        <Link to={"/update/"+std.id}  student = {student}>
                             <i class="fas fa-user-edit text-primary p-1"></i>Edit</Link>
                             
                             </td>
