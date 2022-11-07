@@ -32,7 +32,7 @@ app.get("/students/:id", (req,res)=>{
         if(err){
             console.log(err);
         }else{
-            console.log(result[0]);
+            console.log(result[0].fname);
             res.send(result[0]);
         }
         // console.log(res.data);
@@ -61,10 +61,10 @@ app.put("/update/:id",(req,res) =>{
         about:req.body.about
         
         };
-        let sql = "UPDATE students SET fname ="+fname+ "WHERE id="+std1.id;
+        let sql = "UPDATE students SET fname = "+std1.fname+ " WHERE id="+std1.id;
         connection.query(sql,std1,(err)=>{
             if(!err){
-                console.log("One record Updated");
+                console.log("Something Error");
                 
             }
             res.send("One record updatad");

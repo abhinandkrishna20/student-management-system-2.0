@@ -19,38 +19,55 @@ const UpdateStudent = (props) => {
   const [student,setStudent] = useState([]);
   const param = useParams();
   const id = param.id;
+      // const student1 ={
+        // fname,
+        // lname,
+        // dob,
+        // location,
+        // email,
+        // education,
+        // about
+    // }
+// 
+  const getData=()=>{
+    // const id = param.id;
+    axios.get("http://localhost:3002/students/"+id).then(res=>{
+      setStudent(res.data);
+    alert(student.fname);
+    });
+  }
+
 
   const setData = (e) =>{
     e.preventDefault();
     
     const Dt = yr+"-"+mm+"-"+dt;
     const dob = Dt.toString();
+// 
+      // const student1 ={
+        // fname,
+        // lname,
+        // dob,
+        // location,
+        // email,
+        // education,
+        // about
+    // }
 
-    const stdData ={
-        fname,
-        lname,
-        dob,
-        location,
-        email,
-        education,
-        about
-    }
+    // student ={
+        // fname,
+        // lname,
+        // dob,
+        // location,
+        // email,
+        // education,
+        // about
+    // }
     
-      axios.put("http://localhost:3002/update/"+id,stdData).then(res=>{
-      alert("Studend updated : " + res.data);
+      axios.put("http://localhost:3002/update/"+id,student1).then(res=>{
+      alert("Studend updated : " + student1.fname);
       window.location = "/";
       });
-  }
-  const getData=()=>{
-    // const id = param.id;
-    axios.get("http://localhost:3002/students/"+id).then(res=>{
-      setStudent(res.data);
-    alert(student.fname);
-
-      
-    });
-    
-    
   }
   // useEffect(()=>{
     // getData();
