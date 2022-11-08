@@ -15,6 +15,9 @@ connection.connect((err)=>{
     if(err)throw err;
     console.log("Connection successfull");
 });
+
+
+
 app.get("/students/",(req,res)=>{
     let sql = "SELECT * FROM students";
     connection.query(sql,(err,result)=>{
@@ -45,7 +48,7 @@ connection.query(sql,(err,result)=>{
         console.log(err);
     }else{
         console.log("Delted "+result.affectedRows);
-        console.log(res);
+        
     }
 })
 });
@@ -61,14 +64,14 @@ app.put("/update/:id",(req,res) =>{
         about:req.body.about
         
         };
-        const ups = "fname="+std1.fname+" lname="+std1.lname+" location="+std1.location+" email="+std1.email+" dob="+std1.dob+" education="+std1.education+" about="+std1.about;
+        const ups = "fname="+std1.fname+", lname="+std1.lname+", location="+std1.location+", email="+std1.email+", dob="+std1.dob+", education="+std1.education+", about="+std1.about;
         let sql = "UPDATE students SET fname = "+ups+ " WHERE id="+std1.id;
         connection.query(sql,std1,(err)=>{
             if(!err){
                 console.log("Something Error");
-                
+               
             }
-            res.send("One record updatad");
+            res.send(ups);
         });
     
     

@@ -15,6 +15,28 @@ const Table = () =>{
             updateList(res.data);
         });
     };
+    const searchInput =(e)=>{
+        
+        const idata = e.target.value;
+        const newList= [];
+        newList = stdlist.filter((student)=>{
+            if(idata === ""){
+            return student;
+            }else
+            {
+                if(student.fname.toLowerCase().includes(idata.toLowerCase)){
+                    return student;
+                }
+                
+            }
+               
+            });
+            updateList(newList);
+        
+        
+            
+        }
+    
     const updateSTD = (id)=>{
         axios.get("http://localhost:3002/students/"+id)
         .then(res=>{
@@ -23,10 +45,15 @@ const Table = () =>{
         
     }
     const deleteStd = (id) =>{
-        // const url= "http://localhost:3002/students/"+id;
-        //   axios.delete(url).then(res=>{
-            // alert(res.status);
-        //   })
+        
+        if(window.confirm("Are you sure?")){
+        const url= "http://localhost:3002/students/"+id;
+          axios.delete(url).then(res=>{
+            alert(res.affectedRows);
+          })
+        }else{
+            alert("No deletion!!!")
+        }
     };
 
     useEffect(()=>{
@@ -39,7 +66,7 @@ return(
             <div className="row">
                 <div className="col-sm-6 text-start">
                     <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search" />
+                    <input type="text" className="form-control" placeholder="Search" onChange={searchInput} />
                     <span className="input-group-text"><i className='fa fa-search'></i> </span>
                     </div>
                 
@@ -84,7 +111,7 @@ return(
                             
                             </td>
 
-                        <td className="p-3"><button onClick={deleteStd(std.id)} className='btn text-decoration-none text-danger'>
+                        <td className="p-3"><button onClick={(e)=>{deleteStd(std.id)}} className='btn text-decoration-none text-danger'>
                             <i class="fa fa-trash text-danger p-2" aria-hidden="true"></i>Delete</button></td>
                     </tr>
     

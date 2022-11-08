@@ -54,7 +54,7 @@ const UpdateStudent = (props) => {
 
     
       axios.put("http://localhost:3002/update/"+id,stdData).then(res=>{
-      alert("Studend updated : " + stdData.fname);
+      alert("Result "+res.data);
       window.location = "/";
       });
   }

@@ -2,7 +2,7 @@ import { Link} from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
 const Addstd = (props) => {
-    
+    const [id,setId] = useState(0);
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
   const [location, setLocation] = useState("");
@@ -18,6 +18,7 @@ const Addstd = (props) => {
     
     
     const stdData ={
+        id,
         fname,
         lname,
         dob,
@@ -26,7 +27,14 @@ const Addstd = (props) => {
         education,
         about
     }
-      axios.post("http://localhost:3002/addSTD/",stdData).then(res=>{
+          axios.get("http://localhost:3002/").then(res=>{
+            if(res.data.length<2){
+              setId(1);
+            }
+          })
+
+          
+          axios.post("http://localhost:3002/addSTD/",stdData).then(res=>{
       alert("Studend added" + res.status);
       window.location = "/";
       });
