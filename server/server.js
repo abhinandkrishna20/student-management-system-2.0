@@ -54,7 +54,7 @@ connection.query(sql,(err,result)=>{
 });
 app.put("/update/:id",(req,res) =>{
     let std1=   {
-        id:req.body.id,
+        
         fname:req.body.fname,
         lname:req.body.lname,
         location: req.body.location,
@@ -66,17 +66,17 @@ app.put("/update/:id",(req,res) =>{
         };
         
         
-        const std = [std1.fname,std1.lname,std1.location,std1.dob,std1.education,std1.about];
-        const sql = "UPDATE students SET fname=?, lname=?, .. WHERE id="+req.params.id;
-        connection.query(sql,[std1.fname,...std1.about],(err)=>{
-            if(!err){
-                console.log("student updated success fully ");
-            }else{
-                console.log("Error :"+err);
+        // const std = [std1.fname,std1.lname,std1.location,std1.dob,std1.education,std1.about];
+        // const sql = "UPDATE students SET fname=?, lname=?, .. WHERE id="+req.params.id;
+        // const sql =`UPDATE students SET fname=${std1.fname}, lname=${std1.lname}, location=${std1.location}, dob=${std1.dob},  education=${std1.education}, about=${std1.about} WHERE id=`+req.params.id;
+        const sql = "UPDATE students SET ? WHERE id="+req.params.id;
+        connection.query(sql,std1,(err,result)=>{
+            if(err){
+                return console.error(err);
             }
-            throw (err)=>{
                 console.log(err);
-            }
+            console.log(result.affectedRows+"Reord updated");
+            
             res.send(res.status);
         });
     

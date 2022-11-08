@@ -7,15 +7,15 @@ import Table from "./Table";
 
 const UpdateStudent = (props) => {
     
-  const [fname, setFName] = useState("Intialvalue");
-  const [lname, setLName] = useState("Initialvalue");
-  const [location, setLocation] = useState("Initial value");
-  const [email, setEmail] = useState("Initial value");
-  const [education, setEducation] = useState("Initial value");
-  const [about, setAbout] = useState("Initial value");
-  const [dt, setDt] = useState("Initial value");
-  const [mm, setMm] = useState("Initial value");
-  const [yr, setYr] = useState("Initial value");
+  const [fname, setFName] = useState();
+  const [lname, setLName] = useState();
+  const [location, setLocation] = useState();
+  const [email, setEmail] = useState();
+  const [education, setEducation] = useState();
+  const [about, setAbout] = useState();
+  const [dt, setDt] = useState();
+  const [mm, setMm] = useState();
+  const [yr, setYr] = useState();
   const [student,setStudent] = useState([]);
   const dob =     dt+"-"+mm+"-"+yr;
   const param = useParams();
@@ -54,10 +54,7 @@ const UpdateStudent = (props) => {
         alert("Error");
         window.location = "/";
       }
-      }).catch((err)=>{
-        console.log("the eroor is "+err);
-        window.location = "/";
-      })
+      });
   };
   useEffect(()=>{
     
