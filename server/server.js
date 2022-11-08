@@ -5,7 +5,7 @@ const mysql = require('mysql');
 
 const app = express();
 const PORT = process.env.PORT | 3002;
-app.use(cors());
+app.use(cors({origin: true, credentials: true}));
 app.use(express.json());
 
 const connection = mysql.createConnection({
@@ -35,7 +35,7 @@ app.get("/students/:id", (req,res)=>{
         if(err){
             console.log(err);
         }else{
-            console.log(result[0].fname);
+            console.log("The data are " +result[0].fname);
             res.send(result[0]);
         }
         // console.log(res.data);
@@ -53,7 +53,7 @@ connection.query(sql,(err,result)=>{
 })
 });
 app.put("/update/:id",(req,res) =>{
-    let std1=    {
+    let std1=   {
         id:req.body.id,
         fname:req.body.fname,
         lname:req.body.lname,
@@ -64,14 +64,20 @@ app.put("/update/:id",(req,res) =>{
         about:req.body.about
         
         };
-        const ups = "fname="+std1.fname+", lname="+std1.lname+", location="+std1.location+", email="+std1.email+", dob="+std1.dob+", education="+std1.education+", about="+std1.about;
-        let sql = "UPDATE students SET fname = "+ups+ " WHERE id="+std1.id;
-        connection.query(sql,std1,(err)=>{
+        
+        
+        const std = [std1.fname,std1.lname,std1.location,std1.dob,std1.education,std1.about];
+        const sql = "UPDATE students SET fname=?, lname=?, .. WHERE id="+req.params.id;
+        connection.query(sql,[std1.fname,...std1.about],(err)=>{
             if(!err){
-                console.log("Something Error");
-               
+                console.log("student updated success fully ");
+            }else{
+                console.log("Error :"+err);
             }
-            res.send(ups);
+            throw (err)=>{
+                console.log(err);
+            }
+            res.send(res.status);
         });
     
     

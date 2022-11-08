@@ -27,11 +27,11 @@ const Addstd = (props) => {
         education,
         about
     }
-          axios.get("http://localhost:3002/").then(res=>{
-            if(res.data.length<2){
-              setId(1);
-            }
-          })
+          // axios.get("http://localhost:3002/").then(res=>{
+            // if(res.data.length<2){
+              // setId(1);
+            // }
+          // })
 
           
           axios.post("http://localhost:3002/addSTD/",stdData).then(res=>{

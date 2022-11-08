@@ -20,13 +20,6 @@ const UpdateStudent = (props) => {
   const dob =     dt+"-"+mm+"-"+yr;
   const param = useParams();
   const id = param.id;
-  const getData=()=>{
-    // const id = param.id;
-    axios.get("http://localhost:3002/students/"+id).then(res=>{
-      setStudent(res.data);
-    // alert(student.fname);
-    });
-  }
       // const student1 ={
         // fname,
         // lname,
@@ -39,9 +32,9 @@ const UpdateStudent = (props) => {
 // 
 
 
-  const setData = (e) =>{
+  const updateData = (e) =>{
     e.preventDefault();
-    
+      
     const stdData ={
       fname,
       lname,
@@ -50,19 +43,35 @@ const UpdateStudent = (props) => {
       email,
       education,
       about
-  }
-
-    
-      axios.put("http://localhost:3002/update/"+id,stdData).then(res=>{
-      alert("Result "+res.data);
-      window.location = "/";
-      });
-  }
+    }
+      const URL = "http://localhost:3002/update/"+id;
+      axios.put(URL,stdData)
+      .then(res=>{
+      if(res.status === 200){
+        alert("Student successfully updated");
+        window.location = "/";
+      }else{
+        alert("Error");
+        window.location = "/";
+      }
+      }).catch((err)=>{
+        console.log("the eroor is "+err);
+        window.location = "/";
+      })
+  };
   useEffect(()=>{
-    getData();
+    
+    // const getData=()=>{
+      // const id = param.id;
+      axios.get("http://localhost:3002/students/"+id).then(res=>{
+        setStudent(res.data);
+
+      }).catch((err)=>console.log(err));
+    // }
+    // getData();
   },[]);
   return (
-    <div className="container" onLoad={getData}>
+    <div className="container" >
       <h4 className="text-center">Update Student</h4>
       {/* <button onClick={getData}>click me </button> */}
       <Link to="/">
@@ -136,7 +145,7 @@ const UpdateStudent = (props) => {
               type="text"
               className="form-control"
               name="dt"
-              placeholder="DD"
+              defaultValue={student.dt}
               maxLength={2}
               onChange={(e)=>setDt(e.target.value)}
             />
@@ -146,7 +155,7 @@ const UpdateStudent = (props) => {
               type="text"
               className="form-control"
               name="mm"
-              placeholder="MM"
+              defaultValue={student.mm}
               maxLength={2}
               onChange={(e)=>setMm(e.target.value)}   
             />
@@ -156,7 +165,7 @@ const UpdateStudent = (props) => {
               type="text"
               className="form-control"
               name="yr"
-              placeholder="YYYY"
+              defaultValue={student.yr}
               maxLength={4}
               onChange={(e)=>setYr(e.target.value)}
             />
@@ -193,7 +202,7 @@ const UpdateStudent = (props) => {
         </div>
         <div className="row m-3">
           <div className="offset-2 col-md-4">
-            <button className="btn btn-dark btn-radius-25" onClick={setData} >Submit</button>
+            <button className="btn btn-dark btn-radius-25" onClick={updateData} >Update</button>
           </div>
         </div>
       </form>
