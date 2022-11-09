@@ -1,12 +1,10 @@
 import { Link, useParams} from "react-router-dom";
 import { useState } from "react";
 import axios from 'axios';
-import {stude} from './Table';
 import { useEffect } from "react";
-import Table from "./Table";
+
 
 const UpdateStudent = (props) => {
-    
   const [fname, setFName] = useState();
   const [lname, setLName] = useState();
   const [location, setLocation] = useState();
@@ -70,7 +68,7 @@ const UpdateStudent = (props) => {
       }).catch((err)=>console.log(err));
     // }
     // getData();
-  },[]);
+  },[id]);
   return (
     <div className="container" >
       <h4 className="text-center">Update Student</h4>
