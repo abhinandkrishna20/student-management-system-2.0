@@ -7,9 +7,43 @@ import Confirmbox1 from './Confirmbox';
 
 
 
+
 const Table = () =>{
-    const [stdlist, updateList] = useState([]);
-    const [student, updateStudent] = useState("");
+    const [stdlist, updateList] = useState([
+        {
+            id: 1,
+            fname:"Abhinand",
+            lname: "Krishna",
+            dob: "20-02-1996",
+            location: "Bangalore",
+            education: "BSc",
+            about: "MERN Developer",
+            email: "abhinand@gmail.com"
+        },
+        {
+            id: 2,
+            fname:"Rajesh",
+            lname: "Kanna",
+            dob: "13-02-1990",
+            location: "Chennai",
+            education: "BE",
+            about: "Front-end Developer",
+            email: "rajesh@gmail.com"
+        },
+        {
+            id: 3,
+            fname:"Kishore",
+            lname: "Kumar",
+            dob: "10-12-1993",
+            location: "Mumbai",
+            education: "BCA",
+            about: "Back-end Developer",
+            email: "kishore@gmail.com"
+        }
+
+
+    ]);
+    // const [student, updateStudent] = useState("");
     
     const onload =() =>{
         axios.get("http://localhost:3002/students/")
@@ -17,37 +51,36 @@ const Table = () =>{
             updateList(res.data);
         });
     };
-    const searchInput =(e)=>{
-        
-        const idata = e.target.value;
-        const newList= [];
-        newList = stdlist.filter((student)=>{
-            if(idata === ""){
-            return student;
-            }else
-            {
-                if(student.fname.toLowerCase().includes(idata.toLowerCase)){
-                    return student;
-                }
-                
-            }
-               
-            });
-            updateList(newList);
-        
-        
-            
-        }
+    // Searching Method not working 
+    // const searchInput =(e)=>{
+        // 
+        // const idata = e.target.value;
+        // const newList= [];
+        // stdlist = stdlist.filter((student)=>{
+            // if(idata === ""){
+            // return student;
+            // }else
+            // {
+                // if(student.fname.toLowerCase().includes(idata.toLowerCase)){
+                    // return student;
+                // }
+                // 
+            // }
+            //    
+            // });
+            // updateList(newList);
+        // }
     
-    const updateSTD = (id)=>{
-        axios.get("http://localhost:3002/students/"+id)
-        .then(res=>{
-            updateStudent(res.data);
-        })
+    // const updateSTD = (id)=>{
+        // axios.get("http://localhost:3002/students/"+id)
+        // .then(res=>{
+            // updateStudent(res.data);
+        // })
+        // 
+    // }
+    const deleteStd = (id,e) =>{
+        e.preventDefault();
         
-    }
-    const deleteStd = (id) =>{
-        Confirmbox1.setView();
         if(window.confirm("Are you sure?")){
         const url= "http://localhost:3002/students/"+id;
           axios.delete(url).then(res=>{
@@ -56,9 +89,6 @@ const Table = () =>{
         }else{
             alert("No deletion!!!")
         }
-        return(
-            <Confirmbox1 />
-        )
     };
 
     useEffect(()=>{
@@ -71,7 +101,9 @@ return(
             <div className="row">
                 <div className="col-sm-6 text-start">
                     <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search" onChange={searchInput} />
+                    <input type="text" className="form-control" placeholder="Search" 
+                    // onChange={searchInput} 
+                    />
                     <span className="input-group-text"><i className='fa fa-search'></i> </span>
                     </div>
                 
@@ -110,12 +142,14 @@ return(
                         <td className="p-3">{std.education}</td>
                         <td  className="p-3"                       
                         >
-                        <Link to={"/update/"+std.id}  student = {student}>
+                        <Link to={"/update/"+std.id} 
+                        //  student = {student}
+                         >
                             <i class="fas fa-user-edit text-primary p-1"></i>Edit</Link>
                             
                             </td>
 
-                        <td className="p-3"><button onClick={(e)=>{deleteStd(std.id)}} className='btn text-decoration-none text-danger'>
+                        <td className="p-3"><button onClick={(e)=>{deleteStd(std.id,e)}} className='btn text-decoration-none text-danger'>
                             <i class="fa fa-trash text-danger p-2" aria-hidden="true"></i>Delete</button></td>
                     </tr>
     

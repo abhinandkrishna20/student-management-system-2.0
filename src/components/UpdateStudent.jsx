@@ -62,6 +62,10 @@ const UpdateStudent = (props) => {
       // const id = param.id;
       axios.get("http://localhost:3002/students/"+id).then(res=>{
         setStudent(res.data);
+        const dobArray =res.data.dob.split("-");
+        setDt(dobArray[0]);
+        setMm(dobArray[1]);
+        setYr(dobArray[2]);
 
       }).catch((err)=>console.log(err));
     // }

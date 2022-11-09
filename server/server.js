@@ -35,7 +35,6 @@ app.get("/students/:id", (req,res)=>{
         if(err){
             console.log(err);
         }else{
-            console.log("The data are " +result[0].fname);
             res.send(result[0]);
         }
         // console.log(res.data);
