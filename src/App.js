@@ -6,6 +6,7 @@ import { BrowserRouter,Routes,Route, useParams} from 'react-router-dom';
 import UpdateStudent from './components/UpdateStudent';
 
 
+
 function App() {
   return (
     <div className="container m-2">
@@ -20,7 +21,7 @@ function App() {
         
       </Routes>
       </BrowserRouter>
-
+      
 
     </div>
   );

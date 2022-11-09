@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Confirmbox1 from './Confirmbox';
+
 
 
 
@@ -45,7 +47,7 @@ const Table = () =>{
         
     }
     const deleteStd = (id) =>{
-        
+        Confirmbox1.setView();
         if(window.confirm("Are you sure?")){
         const url= "http://localhost:3002/students/"+id;
           axios.delete(url).then(res=>{
@@ -54,6 +56,9 @@ const Table = () =>{
         }else{
             alert("No deletion!!!")
         }
+        return(
+            <Confirmbox1 />
+        )
     };
 
     useEffect(()=>{
@@ -61,7 +66,7 @@ const Table = () =>{
     },[]);
 return(
 
-    <div className="text-dark">
+    <div className="text-dark table-modal">
         <div className="container text-center">
             <div className="row">
                 <div className="col-sm-6 text-start">
@@ -73,7 +78,7 @@ return(
                 </div>
                 <div className="col-md-6 text-end">
                <Link to="/addstd">
-                <button className="btn btn-dark text-end text-center" style={{"border-radius":"40px","width":"100px"}}><i class="fa fa-user-plus" aria-hidden="true"></i>dd</button></Link>
+                <button className="btn btn-dark text-end text-center" style={{"border-radius":"40px","width":"100px"}}><i class="fa fa-user-plus" aria-hidden="true"></i>Add</button></Link>
                 </div>
             </div>
                     
@@ -103,8 +108,7 @@ return(
                         <td  className="p-3">{std.email}</td>
                         <td className="p-3">{std.dob}</td>
                         <td className="p-3">{std.education}</td>
-                        <td  className="p-3" 
-                        
+                        <td  className="p-3"                       
                         >
                         <Link to={"/update/"+std.id}  student = {student}>
                             <i class="fas fa-user-edit text-primary p-1"></i>Edit</Link>
@@ -121,6 +125,7 @@ return(
                 }
             </tbody>
         </table>
+        <Confirmbox1 />
         </div>
         
     </div>
